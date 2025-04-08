@@ -9,3 +9,8 @@ export const getCarById = async (carId) => {
   const car = await StoreCollection.findById(carId);
   return car;
 };
+
+export const postCar = async (payload) => {
+  const car = StoreCollection.create(payload);
+  return car;
+};
