@@ -39,4 +39,4 @@ const storeSchema = new Schema(
   },
 );
 
-export const StoreCollection = model('store', storeSchema);
+export const StoreCollection = model('store_cars', storeSchema);
