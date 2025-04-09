@@ -11,6 +11,28 @@ export const getCarById = async (carId) => {
 };
 
 export const postCar = async (payload) => {
-  const car = StoreCollection.create(payload);
+  const car = await StoreCollection.create(payload);
+  return car;
+};
+
+export const updateCar = async (carId, payload, options = {}) => {
+  const updatedCar = await StoreCollection.findOneAndUpdate(
+    { _id: carId },
+    payload,
+    {
+      new: true,
+      includeResultMetadata: true,
+      ...options,
+    },
+  );
+
+  return {
+    updatedCarData: updatedCar.value,
+    isNew: Boolean(updatedCar?.lastErrorObject?.upserted),
+  };
+};
+
+export const deleteCar = async (id) => {
+  const car = await StoreCollection.findByIdAndDelete(id);
   return car;
 };

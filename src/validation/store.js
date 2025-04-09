@@ -11,3 +11,13 @@ export const postCarSchema = Joi.object({
   price: Joi.number().required(),
   traffic_accident: Joi.boolean(),
 });
+
+export const updateCarSchema = Joi.object({
+  brand: Joi.string().messages({ 'any.required': 'Brand is required' }),
+  model: Joi.string(),
+  year: Joi.number(),
+  engine_type: Joi.string(),
+  transmission: Joi.string().valid('Automatic', 'Manual'),
+  price: Joi.number(),
+  traffic_accident: Joi.boolean(),
+});
