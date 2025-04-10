@@ -6,9 +6,13 @@ import {
   postCar,
   updateCar,
 } from '../services/store.js';
+import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 
 export const getAllCarsController = async (req, res) => {
-  const cars = await getAllCars();
+  const { page, perPage } = parsePaginationParams(req.query);
+
+  const cars = await getAllCars({ page, perPage });
+
   res.status(200).json({
     status: 200,
     message: 'Successfully found list of cars',
