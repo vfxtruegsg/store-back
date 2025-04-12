@@ -2,7 +2,12 @@ import { StoreCollection } from '../db/models/store.js';
 import { calculatePaginationData } from '../utils/calculatePaginationData.js';
 
 export const getAllCars = async (pagination) => {
-  const { page, perPage } = pagination;
+  const {
+    page = 1,
+    perPage = 10,
+    sortOrder = 'asc',
+    sortBy = '_id',
+  } = pagination;
 
   const limit = perPage;
   const skip = (page - 1) * perPage;
@@ -12,7 +17,11 @@ export const getAllCars = async (pagination) => {
     .merge(carsQuery)
     .countDocuments();
 
-  const cars = await carsQuery.skip(skip).limit(limit).exec();
+  const cars = await carsQuery
+    .skip(skip)
+    .limit(limit)
+    .sort({ [sortBy]: sortOrder })
+    .exec();
   const paginationData = calculatePaginationData(carsCount, perPage, page);
 
   return { data: cars, ...paginationData };

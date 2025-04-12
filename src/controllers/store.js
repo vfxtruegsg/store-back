@@ -7,11 +7,13 @@ import {
   updateCar,
 } from '../services/store.js';
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
+import { parseSortParams } from '../utils/parseSortParams.js';
 
 export const getAllCarsController = async (req, res) => {
   const { page, perPage } = parsePaginationParams(req.query);
+  const { sortOrder, sortBy } = parseSortParams(req.query);
 
-  const cars = await getAllCars({ page, perPage });
+  const cars = await getAllCars({ page, perPage, sortOrder, sortBy });
 
   res.status(200).json({
     status: 200,

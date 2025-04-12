@@ -18,11 +18,19 @@ const storeSchema = new Schema(
       type: String,
       required: true,
     },
+    engine_power: {
+      type: Number,
+      required: true,
+    },
     transmission: {
       type: String,
       required: true,
       enum: ['Automatic', 'Manual'],
       default: 'Manual',
+    },
+    mileage: {
+      type: Number,
+      required: true,
     },
     price: {
       type: Number,
