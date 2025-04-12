@@ -16,6 +16,7 @@ const storeSchema = new Schema(
     },
     engine_type: {
       type: String,
+      enum: ['petrol', 'diesel', 'electric', 'hybrid', 'gas'],
       required: true,
     },
     engine_power: {
@@ -25,8 +26,8 @@ const storeSchema = new Schema(
     transmission: {
       type: String,
       required: true,
-      enum: ['Automatic', 'Manual'],
-      default: 'Manual',
+      enum: ['automatic', 'manual'],
+      default: 'manual',
     },
     mileage: {
       type: Number,

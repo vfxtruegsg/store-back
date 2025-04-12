@@ -8,12 +8,14 @@ import {
 } from '../services/store.js';
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 import { parseSortParams } from '../utils/parseSortParams.js';
+import { parseFilterParams } from '../utils/parseFilterParams.js';
 
 export const getAllCarsController = async (req, res) => {
   const { page, perPage } = parsePaginationParams(req.query);
   const { sortOrder, sortBy } = parseSortParams(req.query);
+  const filter = parseFilterParams(req.query);
 
-  const cars = await getAllCars({ page, perPage, sortOrder, sortBy });
+  const cars = await getAllCars({ page, perPage, sortOrder, sortBy, filter });
 
   res.status(200).json({
     status: 200,
