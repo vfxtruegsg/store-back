@@ -1,4 +1,3 @@
-import { THIRTY_DAYS } from '../constants/index.js';
 import {
   loginUser,
   logoutUser,
@@ -41,7 +40,7 @@ export const logoutUserController = async (req, res) => {
 };
 
 export const refreshUserSessionController = async (req, res) => {
-  const session = refreshUserSession({
+  const session = await refreshUserSession({
     sessionId: req.cookies.sessionId,
     refreshToken: req.cookies.refreshToken,
   });
