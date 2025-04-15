@@ -12,7 +12,7 @@ export const registerUserController = async (req, res) => {
 };
 
 export const loginUserController = async (req, res) => {
-  const session = await loginUser();
+  const session = await loginUser(req.body);
 
   res.cookie('refreshToken', session.refreshToken, {
     httpOnly: true,
@@ -24,7 +24,7 @@ export const loginUserController = async (req, res) => {
     expires: new Date(Date.now() + THIRTY_DAYS),
   });
 
-  res.json({
+  res.status(200).json({
     status: 200,
     message: 'Successfully logged in a user',
     data: { accessToken: session.accessToken },
@@ -38,5 +38,6 @@ export const logoutUserController = async (req, res) => {
 
   res.clearCookie('refreshToken');
   res.clearCookie('sessionId');
+
   res.status(204).send();
 };
