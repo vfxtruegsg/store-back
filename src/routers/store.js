@@ -6,7 +6,6 @@ import {
   getCarByIdController,
   patchCarController,
   postCarController,
-  putCarController,
 } from '../controllers/store.js';
 import { isValidId } from '../middlewares/isValidId.js';
 import { validateBody } from '../middlewares/validateBody.js';
@@ -19,18 +18,9 @@ router.use(authenticate);
 
 router.get('/', ctrlWrapper(getAllCarsController));
 
-// router.get('/my-cars', ctrlWrapper(getAllCarsController));
-
 router.get('/:id', isValidId, ctrlWrapper(getCarByIdController));
 
 router.post('/', validateBody(postCarSchema), ctrlWrapper(postCarController));
-
-router.put(
-  '/:id',
-  validateBody(updateCarSchema),
-  isValidId,
-  ctrlWrapper(putCarController),
-);
 
 router.patch(
   '/:id',
