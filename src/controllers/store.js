@@ -44,23 +44,6 @@ export const postCarController = async (req, res) => {
   });
 };
 
-export const putCarController = async (req, res, next) => {
-  const { id } = req.params;
-  const car = await updateCar(id, req.body, { upsert: true });
-
-  if (!car) {
-    createHttpError(404, 'Car not found');
-    next();
-  }
-  const status = car.isNew ? 201 : 200;
-
-  res.status(status).json({
-    status,
-    message: 'Successfully upserted a car',
-    data: car.updatedCarData,
-  });
-};
-
 export const patchCarController = async (req, res, next) => {
   const { id } = req.params;
 
